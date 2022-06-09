@@ -1,0 +1,31 @@
+﻿  书柜.cpp
+C:\Users\lenovo\Desktop\书架\shelf\Shelf.h(50,62): warning C4838: 从“double”转换到“LONG”需要收缩转换
+C:\Users\lenovo\Desktop\书架\shelf\Shelf.h(50,62): warning C4244: “初始化”: 从“double”转换到“LONG”，可能丢失数据
+C:\Users\lenovo\Desktop\书架\shelf\Shelf.h(93,20): warning C4018: “<”: 有符号/无符号不匹配
+C:\Users\lenovo\Desktop\书架\shelf\Shelf.h(102,20): warning C4018: “<”: 有符号/无符号不匹配
+C:\Users\lenovo\Desktop\书架\shelf\Shelf.h(104,17): warning C4018: “<”: 有符号/无符号不匹配
+C:\Users\lenovo\Desktop\书架\shelf\Shelf.h(123,20): warning C4018: “<”: 有符号/无符号不匹配
+C:\Users\lenovo\Desktop\书架\shelf\书柜.cpp(31,34): warning C4244: “参数”: 从“double”转换到“int”，可能丢失数据
+C:\Users\lenovo\Desktop\书架\shelf\书柜.cpp(32,28): warning C4244: “参数”: 从“double”转换到“int”，可能丢失数据
+C:\Users\lenovo\Desktop\书架\shelf\书柜.cpp(88,34): warning C4244: “参数”: 从“double”转换到“int”，可能丢失数据
+C:\Users\lenovo\Desktop\书架\shelf\书柜.cpp(111,20): warning C4018: “<”: 有符号/无符号不匹配
+C:\Users\lenovo\Desktop\书架\shelf\书柜.cpp(134,87): warning C4244: “参数”: 从“double”转换到“int”，可能丢失数据
+C:\Users\lenovo\Desktop\书架\shelf\书柜.cpp(137,83): warning C4838: 从“double”转换到“LONG”需要收缩转换
+C:\Users\lenovo\Desktop\书架\shelf\书柜.cpp(137,83): warning C4244: “初始化”: 从“double”转换到“LONG”，可能丢失数据
+C:\Users\lenovo\Desktop\书架\shelf\书柜.cpp(146,34): warning C4244: “参数”: 从“double”转换到“int”，可能丢失数据
+C:\Users\lenovo\Desktop\书架\shelf\书柜.cpp(165,87): warning C4244: “参数”: 从“double”转换到“int”，可能丢失数据
+C:\Users\lenovo\Desktop\书架\shelf\书柜.cpp(167,83): warning C4838: 从“double”转换到“LONG”需要收缩转换
+C:\Users\lenovo\Desktop\书架\shelf\书柜.cpp(167,83): warning C4244: “初始化”: 从“double”转换到“LONG”，可能丢失数据
+C:\Users\lenovo\Desktop\书架\shelf\书柜.cpp(178,37): warning C4244: “参数”: 从“double”转换到“int”，可能丢失数据
+C:\Users\lenovo\Desktop\书架\shelf\书柜.cpp(179,29): warning C4244: “参数”: 从“double”转换到“int”，可能丢失数据
+C:\Users\lenovo\Desktop\书架\shelf\书柜.cpp(180,30): warning C4244: “参数”: 从“double”转换到“int”，可能丢失数据
+C:\Users\lenovo\Desktop\书架\shelf\书柜.cpp(183,33): warning C4838: 从“double”转换到“LONG”需要收缩转换
+C:\Users\lenovo\Desktop\书架\shelf\书柜.cpp(183,33): warning C4244: “初始化”: 从“double”转换到“LONG”，可能丢失数据
+C:\Users\lenovo\Desktop\书架\shelf\书柜.cpp(219,38): warning C4244: “参数”: 从“double”转换到“int”，可能丢失数据
+C:\Users\lenovo\Desktop\书架\shelf\书柜.cpp(220,30): warning C4244: “参数”: 从“double”转换到“int”，可能丢失数据
+C:\Users\lenovo\Desktop\书架\shelf\书柜.cpp(221,31): warning C4244: “参数”: 从“double”转换到“int”，可能丢失数据
+C:\Users\lenovo\Desktop\书架\shelf\书柜.cpp(224,34): warning C4838: 从“double”转换到“LONG”需要收缩转换
+C:\Users\lenovo\Desktop\书架\shelf\书柜.cpp(224,34): warning C4244: “初始化”: 从“double”转换到“LONG”，可能丢失数据
+C:\Users\lenovo\Desktop\书架\shelf\书柜.cpp(255,24): warning C4018: “<”: 有符号/无符号不匹配
+C:\Users\lenovo\Desktop\书架\shelf\书柜.cpp(407,17): warning C4018: “<”: 有符号/无符号不匹配
+  shelf.vcxproj -> C:\Users\lenovo\Desktop\书架\shelf\Debug\shelf.exe
