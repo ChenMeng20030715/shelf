@@ -37,21 +37,22 @@ public:
 	char* getNote() { return note; }
 	void setNum(int n) { num = n; }
 	int getSize() { return size; }
+	void setSize(int n) { size = n; }
 	int getNum() { return num; }
 	void show();
 	void showBook();
 };
 
 void Shelf::show() {
-	loadimage(&img2, _T("∑‚√Ê.png"));
 	settextcolor(DARKGRAY);
 	setbkmode(TRANSPARENT);
 	settextstyle(&f);
-	RECT r = { num * 100 + 50, 0, (num + 1) * 100 + 50, H * 0.8 / 9 };
+	RECT r = { num * 100 + 150, 0, num * 100 + 250, H * 0.8 / 9 };
 	drawtext(name, &r, DT_CENTER | DT_VCENTER | DT_SINGLELINE);
 }
 void Shelf::showBook() {
 
+	loadimage(&img2, _T("∑‚√Ê.png"));
 	settextcolor(BLACK);
 	str.clear();
 	bks.clear();
@@ -90,14 +91,7 @@ void Shelf::showBook() {
 		_findclose(hFile);
 	}
 
-	for (int i = 0; i < bks.size(); i++) {
-		if (bks[i].getFlag() == 1 && i != 0) {
-			Book bk;
-			bk = bks[i];
-			bks[i] = bks[0];
-			bks[0] = bk;
-		}
-	}
+	sort(bks.begin(), bks.end(), cm);
 
 	for (int i = 0; i < str.size(); i++) {
 		int j = 0;
@@ -143,7 +137,13 @@ void Shelf::showBook() {
 		}
 	}
 
-	r = { 0,(int)(H*8.2/9),W,H };
+
+	setfillcolor(RGB(137, 149, 154));
+	solidrectangle(50, 500, 100, 532);
+	r = { 50,(int)(H * 8.2 / 9),100,H };
+	drawtext(" ’≤ÿ", &r, DT_CENTER | DT_VCENTER | DT_SINGLELINE);
+
+	r = { 150,(int)(H * 8.2 / 9),W - 150,H };
 	drawtext(note, &r, DT_CENTER | DT_VCENTER | DT_SINGLELINE);
 
 }

@@ -5,7 +5,7 @@ class Book
 {
 private:
 	char name[100];
-	int page;
+	int page=1;
 	int flag=0;
 public:
 	char* getName() { return name; }

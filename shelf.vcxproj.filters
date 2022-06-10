@@ -21,6 +21,12 @@
     <ClInclude Include="Shelf.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="Cobook.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Coshelf.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="书柜.cpp">
