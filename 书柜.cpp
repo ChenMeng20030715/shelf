@@ -119,7 +119,7 @@ void getSh(string path, int flag) {
 		string t;
 		t.assign(DATA_DIR).append("\\").append(ff[i].name);
 
-		errno_t err;
+		/*errno_t err;
 		err = fopen_s(&fp, t.c_str(), "rb");
 		if (err) {
 			puts("打开文件失败");
@@ -128,7 +128,15 @@ void getSh(string path, int flag) {
 		fread(&sh, sizeof(sh), 1, fp);
 
 		shs.push_back(sh);
-		fclose(fp);
+		fclose(fp);*/
+		ifstream is;
+		is.open(t.c_str(), ios_base::in | ios_base::binary);
+		if (is) {
+			is.read(reinterpret_cast<char*>(&sh), sizeof(sh));
+			shs.push_back(sh);
+		}
+		is.close();
+
 	}
 
 	sort(shs.begin(), shs.end(),cmp2);
@@ -276,27 +284,39 @@ void readBook(int temp) {
 						string ttt;
 						ttt = tt;
 						ttt.append(bks[i].getName()).append(".sdd");
-						errno_t err;
+						/*errno_t err;
 						err = fopen_s(&fpp, ttt.c_str(), "wb+");
 						if (err) {
 							puts("打开文件失败");
 							exit(0);
 						}
 						fwrite(&bks[i], sizeof(bks[i]), 1, fpp);
-						fclose(fpp);
+						fclose(fpp);*/
+
+						ofstream os;
+						os.open(ttt.c_str(), ios_base::out | ios_base::binary);
+						os.write(reinterpret_cast<char*>(&bks[i]), sizeof(bks[i]));
+						os.close();
+
 					}
 					for (int i = 0; i < cbs.size(); i++) {
 						string ttt;
 						ttt = tt;
 						ttt.append(cbs[i].getName()).append(".co");
-						errno_t err;
+						/*errno_t err;
 						err = fopen_s(&fpp, ttt.c_str(), "wb+");
 						if (err) {
 							puts("打开文件失败");
 							exit(0);
 						}
 						fwrite(&cbs[i], sizeof(cbs[i]), 1, fpp);
-						fclose(fpp);
+						fclose(fpp);*/
+
+						ofstream os;
+						os.open(ttt.c_str(), ios_base::out | ios_base::binary);
+						os.write(reinterpret_cast<char*>(&cbs[i]), sizeof(cbs[i]));
+						os.close();
+
 					}
 
 					bkg();

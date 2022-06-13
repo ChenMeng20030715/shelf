@@ -2,6 +2,7 @@
 #include "Shelf.h"
 #include "Cobook.h"
 vector<Cobook>cbs;
+
 bool cm1(Cobook a, Cobook b) {
 	return a.getFlag() < b.getFlag();
 }
@@ -26,14 +27,23 @@ void Coshelf::getCoBook() {
 			if (strcmp(fileinfo.name, ".") != 0 && strcmp(fileinfo.name, "..") != 0) {
 				string t;
 				t.assign("C:\\Users\\lenovo\\Desktop\\Êé\\").append(getName()).append("\\").append(fileinfo.name);
-				FILE* fp;
+				/*FILE* fp;
 				fopen_s(&fp, t.c_str(), "rb");
 				if (fp != 0) {
 					Cobook cb;
 					fread(&cb, sizeof(cb), 1, fp);
 					cbs.push_back(cb);
 					fclose(fp);
+				}*/
+
+				ifstream is;
+				is.open(t.c_str(), ios_base::in | ios_base::binary);
+				if (is) {
+					Cobook cb;
+					is.read(reinterpret_cast<char*>(&cb), sizeof(cb));
+					cbs.push_back(cb);
 				}
+				is.close();
 			}
 		} while (_findnext(hFile, &fileinfo) == 0);
 		_findclose(hFile);

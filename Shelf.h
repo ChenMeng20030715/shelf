@@ -10,6 +10,7 @@ vector<string> str;
 LOGFONT f;
 IMAGE img2;
 int W = 960, H = 540;
+
 bool cm(Book a, Book b) {
 	return a.getFlag() < b.getFlag();
 }
@@ -78,14 +79,24 @@ void Shelf::showBook() {
 			if (strcmp(fileinfo.name, ".") != 0 && strcmp(fileinfo.name, "..") != 0) {
 				string t;
 				t.assign("C:\\Users\\lenovo\\Desktop\\Êé\\").append(name).append("\\").append(fileinfo.name);
-				FILE* fp;
-				fopen_s(&fp, t.c_str(), "rb");
-				if (fp != 0) {
+				//FILE* fp;
+				//fopen_s(&fp, t.c_str(), "rb");
+				/*if (fp != 0) {
 					Book bk;
 					fread(&bk, sizeof(bk), 1, fp);
 					bks.push_back(bk);
 					fclose(fp);
+				}*/
+				ifstream is;
+				is.open(t.c_str(), ios_base::in | ios_base::binary);
+				if (is) {
+					Book bk;
+					is.read(reinterpret_cast<char*>(&bk), sizeof(bk));
+					bks.push_back(bk);
+
 				}
+				is.close();
+
 			}
 		} while (_findnext(hFile, &fileinfo) == 0);
 		_findclose(hFile);
