@@ -151,8 +151,11 @@ void Shelf::showBook() {
 
 	setfillcolor(RGB(137, 149, 154));
 	solidrectangle(50, 500, 100, 532);
+	solidrectangle(860, 500, 910, 532);
 	r = { 50,(int)(H * 8.2 / 9),100,H };
 	drawtext(" ’≤ÿ", &r, DT_CENTER | DT_VCENTER | DT_SINGLELINE);
+	r = { 860,(int)(H * 8.2 / 9),910,H };
+	drawtext("∞Ô÷˙", &r, DT_CENTER | DT_VCENTER | DT_SINGLELINE);
 
 	r = { 150,(int)(H * 8.2 / 9),W - 150,H };
 	drawtext(note, &r, DT_CENTER | DT_VCENTER | DT_SINGLELINE);

@@ -204,6 +204,8 @@ void readBook(int temp) {
 	settextcolor(BLACK);
 	RECT r = { 50, 0, 100, H * 0.8 / 9 };
 	drawtext("返回", &r, DT_CENTER | DT_VCENTER | DT_SINGLELINE);
+	r = { 860, 0, 910, (int)(H * 0.8 / 9) };
+	drawtext("第一页", &r, DT_CENTER | DT_VCENTER | DT_SINGLELINE);
 	r = { 50,(int)(H * 8.2 / 9), 100, H };
 	drawtext("上一页", &r, DT_CENTER | DT_VCENTER | DT_SINGLELINE);
 	r = { 860,(int)(H * 8.2 / 9), 910, H };
@@ -245,6 +247,8 @@ void readBook(int temp) {
 		settextcolor(BLACK);
 		RECT r = { 50, 0, 100, H * 0.8 / 9 };
 		drawtext("返回", &r, DT_CENTER | DT_VCENTER | DT_SINGLELINE);
+		r = { 860, 0, 910, (int)(H * 0.8 / 9) };
+		drawtext("第一页", &r, DT_CENTER | DT_VCENTER | DT_SINGLELINE);
 		r = { 50,(int)(H * 8.2 / 9), 100, H };
 		drawtext("上一页", &r, DT_CENTER | DT_VCENTER | DT_SINGLELINE);
 		r = { 860,(int)(H * 8.2 / 9), 910, H };
@@ -325,6 +329,21 @@ void readBook(int temp) {
 				}
 				
 
+				if (e.x > 860 && e.x < 910 && e.y>0 && e.y < H * 8.2 / 9) {
+					fclose(fp);
+					num = 0;
+					errno_t err;
+					err = fopen_s(&fp, t.c_str(), "r");
+					if (err) {
+						puts("打开文件失败");
+						exit(0);
+					}
+					if (bks[temp].getPage() > 1)
+						bks[temp].setPage(1);
+					break;
+				}
+
+
 				if (e.x > 50 && e.x < 100 && e.y>H * 8.2 / 9 && e.y < H) {
 					fclose(fp);
 					num = 0;
@@ -360,6 +379,8 @@ void readCoBook(int temp) {
 	settextcolor(BLACK);
 	RECT r = { 50, 0, 100, H * 0.8 / 9 };
 	drawtext("返回", &r, DT_CENTER | DT_VCENTER | DT_SINGLELINE);
+	r = { 860, 0, 910, (int)(H * 0.8 / 9) };
+	drawtext("第一页", &r, DT_CENTER | DT_VCENTER | DT_SINGLELINE);
 	r = { 50,(int)(H * 8.2 / 9), 100, H };
 	drawtext("上一页", &r, DT_CENTER | DT_VCENTER | DT_SINGLELINE);
 	r = { 860,(int)(H * 8.2 / 9), 910, H };
@@ -401,6 +422,8 @@ void readCoBook(int temp) {
 		settextcolor(BLACK);
 		RECT r = { 50, 0, 100, H * 0.8 / 9 };
 		drawtext("返回", &r, DT_CENTER | DT_VCENTER | DT_SINGLELINE);
+		r = { 860, 0, 910, (int)(H * 0.8 / 9) };
+		drawtext("第一页", &r, DT_CENTER | DT_VCENTER | DT_SINGLELINE);
 		r = { 50,(int)(H * 8.2 / 9), 100, H };
 		drawtext("上一页", &r, DT_CENTER | DT_VCENTER | DT_SINGLELINE);
 		r = { 860,(int)(H * 8.2 / 9), 910, H };
@@ -440,32 +463,55 @@ void readCoBook(int temp) {
 						string ttt;
 						ttt = tt;
 						ttt.append(bks[i].getName()).append(".sdd");
-						errno_t err;
+						/*errno_t err;
 						err = fopen_s(&fpp, ttt.c_str(), "wb+");
 						if (err) {
 							puts("打开文件失败");
 							exit(0);
 						}
 						fwrite(&bks[i], sizeof(bks[i]), 1, fpp);
-						fclose(fpp);
+						fclose(fpp);*/
+						ofstream os;
+						os.open(ttt.c_str(), ios_base::out | ios_base::binary);
+						os.write(reinterpret_cast<char*>(&bks[i]), sizeof(bks[i]));
+						os.close();
 					}
 					for (int i = 0; i < cbs.size(); i++) {
 						string ttt;
 						ttt = tt;
 						ttt.append(cbs[i].getName()).append(".co");
-						errno_t err;
+						/*errno_t err;
 						err = fopen_s(&fpp, ttt.c_str(), "wb+");
 						if (err) {
 							puts("打开文件失败");
 							exit(0);
 						}
 						fwrite(&cbs[i], sizeof(cbs[i]), 1, fpp);
-						fclose(fpp);
+						fclose(fpp);*/
+						ofstream os;
+						os.open(ttt.c_str(), ios_base::out | ios_base::binary);
+						os.write(reinterpret_cast<char*>(&cbs[i]), sizeof(cbs[i]));
+						os.close();
 					}
 
 					bkg();
 					csh[Flag].showCoBook();
 					return;
+				}
+
+
+				if (e.x > 860 && e.x < 910 && e.y>0 && e.y < H * 8.2 / 9) {
+					fclose(fp);
+					num = 0;
+					errno_t err;
+					err = fopen_s(&fp, t.c_str(), "r");
+					if (err) {
+						puts("打开文件失败");
+						exit(0);
+					}
+					if (cbs[temp].getPage() > 1)
+						cbs[temp].setPage(1);
+					break;
 				}
 
 
@@ -558,12 +604,16 @@ void getCo(int flag) {
 
 									string temp = DATA_DIR;
 									temp.append("\\").append(csh[Flag].getName()).append("\\").append(cbs[j].getName()).append(".co");
-									FILE* fp;
+									/*FILE* fp;
 									fopen_s(&fp, temp.c_str(), "wb+");
 									if (fp != 0) {
 										fwrite(&cbs[j], sizeof(cbs[j]), 1, fp);
 										fclose(fp);
-									}
+									}*/
+									ofstream os;
+									os.open(temp.c_str(), ios_base::out | ios_base::binary);
+									os.write(reinterpret_cast<char*>(&cbs[j]), sizeof(cbs[j]));
+									os.close();
 								}
 
 								bkg();
@@ -577,12 +627,16 @@ void getCo(int flag) {
 
 								string te;
 								te.assign(DATA_DIR).append("\\").append(csh[Flag].getName()).append("\\").append(cbs[temp].getName()).append(".co");
-								FILE* fp;
+								/*FILE* fp;
 								fopen_s(&fp, te.c_str(), "wb+");
 								if (fp != 0) {
 									fwrite(&cbs[temp], sizeof(cbs[temp]), 1, fp);
 									fclose(fp);
-								}
+								}*/
+								ofstream os;
+								os.open(te.c_str(), ios_base::out | ios_base::binary);
+								os.write(reinterpret_cast<char*>(&cbs[temp]), sizeof(cbs[temp]));
+								os.close();
 
 								bkg();
 								csh[Flag].showCoBook();
@@ -601,6 +655,56 @@ void getCo(int flag) {
 
 
 
+}
+
+//帮助
+void help() {
+	cleardevice();
+	bkg();
+	setbkmode(TRANSPARENT);
+	settextcolor(BLACK);
+	RECT r = { 860,(int)(H * 8.2 / 9),910,H };
+	drawtext("返回", &r, DT_CENTER | DT_VCENTER | DT_SINGLELINE);
+	string t;
+
+	r = { 150,80,860,100};
+	drawtext("一，首页。", &r, DT_LEFT);
+	r = { 150,100,860,120 };
+	drawtext("1，上栏：为书架名称，左击书架名称可切换书架，按住CTRL并右击删除书架。", &r, DT_LEFT);
+	r = { 150,120,860,140 };
+	drawtext("2，下栏：左为“收藏”，左击“收藏”进入对应收藏页面。中间为书架备注，右击此区域修改备注。", &r, DT_LEFT);
+	r = { 150,140,860,160 };
+	drawtext("3，中部：主体为书籍，左击封面进入看书界面，右击封面收藏书籍。", &r, DT_LEFT);
+	r = { 150,160,860,180 };
+	drawtext("4，其他：在首页空白处右击，可以创建新书架。", &r, DT_LEFT);
+	r = { 150,200,860,220 };
+	drawtext("二，收藏。", &r, DT_LEFT);
+	r = { 150,220,860,240 };
+	drawtext("1，上栏：对应首页的书架名称。", &r, DT_LEFT);
+	r = { 150,240,860,260 };
+	drawtext("2，下栏：左侧为“返回”，左击返回首页。", &r, DT_LEFT);
+	r = { 150,260,860,280 };
+	drawtext("3，中部：左击封面看书，右击封面修改书籍备注，按住CTRL并右击封面取消收藏。", &r, DT_LEFT);
+	r = { 150,300,860,320 };
+	drawtext("三，看书。", &r, DT_LEFT);
+	r = { 150,320,860,340 };
+	drawtext("1，左击“返回”推出看书界面。", &r, DT_LEFT);
+	r = { 150,340,860,360 };
+	drawtext("2，左击“第一页”，“上一页”和“下一页”。", &r, DT_LEFT);
+
+		
+	ExMessage e;
+	while (1) {
+		e = getmessage(EM_MOUSE | EM_KEY);
+
+		if (e.message == WM_LBUTTONDOWN) {
+			if (e.x > 860 && e.x<910 && e.y>H * 8.2 / 9 && e.y < H) {
+				cleardevice();
+				getShe(Flag);
+				return;
+			}
+		}
+	}
 }
 
 //创建书架
@@ -637,12 +741,16 @@ void build() {
 
 							string temp = DATA_DIR;
 							temp.append("\\").append(shs[j].getName()).append(".txt");
-							FILE* fp;
+							/*FILE* fp;
 							fopen_s(&fp, temp.c_str(), "wb+");
 							if (fp != 0) {
 								fwrite(&shs[j], sizeof(shs[j]), 1, fp);
 								fclose(fp);
-							}
+							}*/
+							ofstream os;
+							os.open(temp.c_str(), ios_base::out | ios_base::binary);
+							os.write(reinterpret_cast<char*>(&shs[j]), sizeof(shs[j]));
+							os.close();
 						}
 
 						Flag = 0;
@@ -659,12 +767,16 @@ void build() {
 
 				string p;
 				p.assign(DATA_DIR).append("\\").append(shs[Flag].getName()).append(".txt");
-				FILE* fp;
+				/*FILE* fp;
 				fopen_s(&fp, p.c_str(), "wb+");
 				if (fp != 0) {
 					fwrite(&shs[Flag], sizeof(shs[Flag]), 1, fp);
 					fclose(fp);
-				}
+				}*/
+				ofstream os;
+				os.open(p.c_str(), ios_base::out | ios_base::binary);
+				os.write(reinterpret_cast<char*>(&shs[Flag]), sizeof(shs[Flag]));
+				os.close();
 
 				getShe(Flag);
 
@@ -688,14 +800,18 @@ void build() {
 							te.assign(DATA_DIR).append("\\").append(shs[Flag].getName()).append("\\").append(bks[temp].getName()).append(".co");
 
 							if (temp < bks.size()) {
-								errno_t err;
+								/*errno_t err;
 								err = fopen_s(&fps, te.c_str(), "wb+");
 								if (err) {
 									puts("打开文件失败");
 									exit(0);
 								}
 								fwrite(&cb, sizeof(cb), 1, fps);
-								fclose(fps);
+								fclose(fps);*/
+								ofstream os;
+								os.open(te.c_str(), ios_base::out | ios_base::binary);
+								os.write(reinterpret_cast<char*>(&cb), sizeof(cb));
+								os.close();
 							}
 
 							csh[Flag].getCoBook();
@@ -726,16 +842,21 @@ void build() {
 			num++;
 
 			p.append(".txt");
-			FILE* fp;
+			/*FILE* fp;
 			fopen_s(&fp, p.c_str(), "wb+");
 			if (fp != 0) {
 				fwrite(&sh, sizeof(sh), 1, fp);
 				fclose(fp);
 			}
+			shs.push_back(sh);*/
+			ofstream os;
+			os.open(p.c_str(), ios_base::out | ios_base::binary);
+			os.write(reinterpret_cast<char*>(&sh), sizeof(sh));
 			shs.push_back(sh);
+			os.close();
 
 			Flag = num - 1;
-			getShe(Flag);
+			getSh(DATA_DIR, Flag);
 		}
 
 		if (m.message == WM_LBUTTONDOWN) {
@@ -752,6 +873,13 @@ void build() {
 			if (m.x > 50 && m.y > 500 && m.x < 100 && m.y < 532) {
 
 				getCo(Flag);
+
+				continue;
+			}
+
+			if (m.x > 860 && m.y > 500 && m.x < 910 && m.y < 532) {
+
+				help();
 
 				continue;
 			}
