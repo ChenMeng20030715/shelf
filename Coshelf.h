@@ -61,6 +61,9 @@ void Coshelf::showCoBook() {
 
 	getCoBook();
 
+	settextcolor(BLACK);
+	setfillcolor(RGB(137, 149, 154));
+	solidrectangle(150, 0, 250, (int)(H * 0.8 / 9));
 	RECT r = { 150, 0, 250, (int)(H * 0.8 / 9) };
 	drawtext(getName(), &r, DT_CENTER | DT_VCENTER | DT_SINGLELINE);
 

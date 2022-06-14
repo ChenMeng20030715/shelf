@@ -662,8 +662,16 @@ void help() {
 	bkg();
 	setbkmode(TRANSPARENT);
 	settextcolor(BLACK);
+	setfillcolor(RGB(137, 149, 154));
+	solidrectangle(860, 500, 910, 532);
 	RECT r = { 860,(int)(H * 8.2 / 9),910,H };
 	drawtext("返回", &r, DT_CENTER | DT_VCENTER | DT_SINGLELINE);
+
+	solidrectangle(150, 0, 250, (int)(H * 0.8 / 9));
+	r = { 150, 0, 250, (int)(H * 0.8 / 9) };
+	drawtext("帮助", &r, DT_CENTER | DT_VCENTER | DT_SINGLELINE);
+
+
 	string t;
 
 	r = { 150,80,860,100};
@@ -690,6 +698,12 @@ void help() {
 	drawtext("1，左击“返回”推出看书界面。", &r, DT_LEFT);
 	r = { 150,340,860,360 };
 	drawtext("2，左击“第一页”，“上一页”和“下一页”。", &r, DT_LEFT);
+	r = { 150,380,860,400 };
+	drawtext("四，添加或删除书籍。", &r, DT_LEFT);
+	r = { 150,400,860,420 };
+	drawtext("1，存书路径为“C:\\Users\\lenovo\\Desktop\\书”", &r, DT_LEFT);
+	r = { 150,420,860,440 };
+	drawtext("2，通过修改文件夹中文件，添加或者删除书籍", &r, DT_LEFT);
 
 		
 	ExMessage e;
