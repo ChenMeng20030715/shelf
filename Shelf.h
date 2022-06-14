@@ -48,7 +48,7 @@ void Shelf::show() {
 	settextcolor(DARKGRAY);
 	setbkmode(TRANSPARENT);
 	settextstyle(&f);
-	RECT r = { num * 100 + 150, 0, num * 100 + 250, H * 0.8 / 9 };
+	RECT r = { num * 100 + 150, 0, num * 100 + 250, (int)(H * 0.8 / 9) };
 	drawtext(name, &r, DT_CENTER | DT_VCENTER | DT_SINGLELINE);
 }
 void Shelf::showBook() {
@@ -104,8 +104,8 @@ void Shelf::showBook() {
 
 	sort(bks.begin(), bks.end(), cm);
 
-	for (int i = 0; i < str.size(); i++) {
-		int j = 0;
+	for (unsigned int i = 0; i < str.size(); i++) {
+		unsigned int j = 0;
 		for (j = 0; j < bks.size(); j++) {
 			string t;
 			t.assign(bks[j].getName()).append(".txt");
@@ -125,7 +125,7 @@ void Shelf::showBook() {
 	}
 
 	sort(bks.begin(), bks.end(), cm);
-	for (int i = 0; i < bks.size(); i++) {
+	for (unsigned int i = 0; i < bks.size(); i++) {
 		bks[i].setFlag(i);
 	}
 

@@ -33,8 +33,8 @@ bool cmp2(Shelf a, Shelf b) {
 void bkg() {
 	putimage(0, 0, &img1);
 	setfillcolor(RGB(173, 186, 192));
-	solidrectangle(0, 0, W, H * 0.8 / 9);
-	solidrectangle(0, H * 8.2 / 9, W, H);
+	solidrectangle(0, 0, W, (int)(H * 0.8 / 9));
+	solidrectangle(0, (int)(H * 8.2 / 9), W, H);
 }
 
 //背景
@@ -90,7 +90,7 @@ void getSh(string path, int flag) {
 	ff.clear();
 	shs.clear();
 	setfillcolor(RGB(173, 186, 192));
-	solidrectangle(0, 0, W, H * 0.8 / 9);
+	solidrectangle(0, 0, W, (int)(H * 0.8 / 9));
 	long   hFile = 0;
 	_finddata_t fileinfo;
 	string p;
@@ -113,9 +113,8 @@ void getSh(string path, int flag) {
 
 	sort(ff.begin(), ff.end(), cmp1);
 
-	for (int i = 0; i < ff.size(); i++) {
+	for (unsigned int i = 0; i < ff.size(); i++) {
 		Shelf sh;
-		FILE* fp;
 		string t;
 		t.assign(DATA_DIR).append("\\").append(ff[i].name);
 
@@ -153,10 +152,10 @@ void getSh(string path, int flag) {
 		if (shs[i].getNum() == flag) {
 			shs[i].showBook();
 			setfillcolor(RGB(137, 149, 154));
-			solidrectangle(shs[i].getNum() * 100 + 150, 0, shs[i].getNum() * 100 + 250, H * 0.8 / 9);
+			solidrectangle(shs[i].getNum() * 100 + 150, 0, shs[i].getNum() * 100 + 250, (int)(H * 0.8 / 9));
 			settextcolor(BLACK);
 			settextstyle(&f);
-			RECT r = { shs[i].getNum() * 100 + 150, 0, shs[i].getNum() * 100 + 250, H * 0.8 / 9 };
+			RECT r = { shs[i].getNum() * 100 + 150, 0, shs[i].getNum() * 100 + 250, (int)(H * 0.8 / 9) };
 			drawtext(shs[i].getName(), &r, DT_CENTER | DT_VCENTER | DT_SINGLELINE);
 		}
 	}
@@ -165,7 +164,7 @@ void getSh(string path, int flag) {
 //获取书架
 void getShe(int flag) {
 	setfillcolor(RGB(173, 186, 192));
-	solidrectangle(0, 0, W, H * 0.8 / 9);
+	solidrectangle(0, 0, W, (int)(H * 0.8 / 9));
 	num = shs.size();
 	settextstyle(&f);
 
@@ -184,9 +183,9 @@ void getShe(int flag) {
 	for (int i = 0; i < num; i++) {
 		if (shs[i].getNum() == flag) {
 			setfillcolor(RGB(137, 149, 154));
-			solidrectangle(shs[i].getNum() * 100 + 150, 0, shs[i].getNum() * 100 + 250, H * 0.8 / 9);
+			solidrectangle(shs[i].getNum() * 100 + 150, 0, shs[i].getNum() * 100 + 250, (int)(H * 0.8 / 9));
 			settextcolor(BLACK);
-			RECT r = { shs[i].getNum() * 100 + 150, 0, shs[i].getNum() * 100 + 250, H * 0.8 / 9 };
+			RECT r = { shs[i].getNum() * 100 + 150, 0, shs[i].getNum() * 100 + 250, (int)(H * 0.8 / 9) };
 			drawtext(shs[i].getName(), &r, DT_CENTER | DT_VCENTER | DT_SINGLELINE);
 		}
 	}
@@ -197,12 +196,12 @@ void getShe(int flag) {
 void readBook(int temp) {
 	cleardevice();
 	bkg();
-	solidrectangle(50, 0, 100, H * 0.8 / 9);
-	solidrectangle(50, H * 8.2 / 9, 100, H);
-	solidrectangle(860, H * 8.2 / 9, 910, H);
+	solidrectangle(50, 0, 100, (int)(H * 0.8 / 9));
+	solidrectangle(50, (int)(H * 8.2 / 9), 100, H);
+	solidrectangle(860, (int)(H * 8.2 / 9), 910, H);
 	setbkmode(TRANSPARENT);
 	settextcolor(BLACK);
-	RECT r = { 50, 0, 100, H * 0.8 / 9 };
+	RECT r = { 50, 0, 100, (int)(H * 0.8 / 9) };
 	drawtext("返回", &r, DT_CENTER | DT_VCENTER | DT_SINGLELINE);
 	r = { 860, 0, 910, (int)(H * 0.8 / 9) };
 	drawtext("第一页", &r, DT_CENTER | DT_VCENTER | DT_SINGLELINE);
@@ -213,7 +212,7 @@ void readBook(int temp) {
 
 	ExMessage e;
 
-	FILE* fp, * fpp;
+	FILE* fp;
 	char ch[1000];
 	int num = 0;
 	string t, tt;
@@ -240,12 +239,12 @@ void readBook(int temp) {
 
 
 		bkg();
-		solidrectangle(50, 0, 100, H * 0.8 / 9);
-		solidrectangle(50, H * 8.2 / 9, 100, H);
-		solidrectangle(860, H * 8.2 / 9, 910, H);
+		solidrectangle(50, 0, 100, (int)(H * 0.8 / 9));
+		solidrectangle(50, (int)(H * 8.2 / 9), 100, H);
+		solidrectangle(860, (int)(H * 8.2 / 9), 910, H);
 		setbkmode(TRANSPARENT);
 		settextcolor(BLACK);
-		RECT r = { 50, 0, 100, H * 0.8 / 9 };
+		RECT r = { 50, 0, 100, (int)(H * 0.8 / 9) };
 		drawtext("返回", &r, DT_CENTER | DT_VCENTER | DT_SINGLELINE);
 		r = { 860, 0, 910, (int)(H * 0.8 / 9) };
 		drawtext("第一页", &r, DT_CENTER | DT_VCENTER | DT_SINGLELINE);
@@ -278,13 +277,13 @@ void readBook(int temp) {
 					bks[temp].setFlag(0);
 					bks[temp].setPage(num);
 					csh[Flag].getCoBook();
-					for (int i = 0; i < cbs.size(); i++) {
+					for (unsigned int i = 0; i < cbs.size(); i++) {
 						if (strcmp(cbs[i].getName(), bks[temp].getName())==0) {
 							cbs[i].setPage(num);
 						}
 					}
 
-					for (int i = 0; i < bks.size(); i++) {
+					for (unsigned int i = 0; i < bks.size(); i++) {
 						string ttt;
 						ttt = tt;
 						ttt.append(bks[i].getName()).append(".sdd");
@@ -303,7 +302,7 @@ void readBook(int temp) {
 						os.close();
 
 					}
-					for (int i = 0; i < cbs.size(); i++) {
+					for (unsigned int i = 0; i < cbs.size(); i++) {
 						string ttt;
 						ttt = tt;
 						ttt.append(cbs[i].getName()).append(".co");
@@ -372,12 +371,12 @@ void readBook(int temp) {
 void readCoBook(int temp) {
 	cleardevice();
 	bkg();
-	solidrectangle(50, 0, 100, H * 0.8 / 9);
-	solidrectangle(50, H * 8.2 / 9, 100, H);
-	solidrectangle(860, H * 8.2 / 9, 910, H);
+	solidrectangle(50, 0, 100, (int)(H * 0.8 / 9));
+	solidrectangle(50, (int)(H * 8.2 / 9), 100, H);
+	solidrectangle(860, (int)(H * 8.2 / 9), 910, H);
 	setbkmode(TRANSPARENT);
 	settextcolor(BLACK);
-	RECT r = { 50, 0, 100, H * 0.8 / 9 };
+	RECT r = { 50, 0, 100, (int)(H * 0.8 / 9) };
 	drawtext("返回", &r, DT_CENTER | DT_VCENTER | DT_SINGLELINE);
 	r = { 860, 0, 910, (int)(H * 0.8 / 9) };
 	drawtext("第一页", &r, DT_CENTER | DT_VCENTER | DT_SINGLELINE);
@@ -388,7 +387,7 @@ void readCoBook(int temp) {
 
 	ExMessage e;
 
-	FILE* fp, * fpp;
+	FILE* fp;
 	char ch[1000];
 	int num = 0;
 	string t, tt;
@@ -415,12 +414,12 @@ void readCoBook(int temp) {
 
 
 		bkg();
-		solidrectangle(50, 0, 100, H * 0.8 / 9);
-		solidrectangle(50, H * 8.2 / 9, 100, H);
-		solidrectangle(860, H * 8.2 / 9, 910, H);
+		solidrectangle(50, 0, 100, (int)(H * 0.8 / 9));
+		solidrectangle(50, (int)(H * 8.2 / 9), 100, H);
+		solidrectangle(860, (int)(H * 8.2 / 9), 910, H);
 		setbkmode(TRANSPARENT);
 		settextcolor(BLACK);
-		RECT r = { 50, 0, 100, H * 0.8 / 9 };
+		RECT r = { 50, 0, 100, (int)(H * 0.8 / 9) };
 		drawtext("返回", &r, DT_CENTER | DT_VCENTER | DT_SINGLELINE);
 		r = { 860, 0, 910, (int)(H * 0.8 / 9) };
 		drawtext("第一页", &r, DT_CENTER | DT_VCENTER | DT_SINGLELINE);
@@ -452,14 +451,14 @@ void readCoBook(int temp) {
 
 					cbs[temp].setFlag(0);
 					cbs[temp].setPage(num);
-					for (int i = 0; i < bks.size(); i++) {
+					for (unsigned int i = 0; i < bks.size(); i++) {
 						if (strcmp(bks[i].getName(),cbs[temp].getName())==0) {
 							bks[i].setPage(num);
 						}
 					}
 
 
-					for (int i = 0; i < bks.size(); i++) {
+					for (unsigned int i = 0; i < bks.size(); i++) {
 						string ttt;
 						ttt = tt;
 						ttt.append(bks[i].getName()).append(".sdd");
@@ -476,7 +475,7 @@ void readCoBook(int temp) {
 						os.write(reinterpret_cast<char*>(&bks[i]), sizeof(bks[i]));
 						os.close();
 					}
-					for (int i = 0; i < cbs.size(); i++) {
+					for (unsigned int i = 0; i < cbs.size(); i++) {
 						string ttt;
 						ttt = tt;
 						ttt.append(cbs[i].getName()).append(".co");
@@ -566,7 +565,7 @@ void getCo(int flag) {
 				if (e.y > 80 + i * 133 && e.y < 170 + i * 133) {
 					for (int j = 0; j < 84; j++) {
 						if (e.x > 150 + j * 190 && e.x < 217 + j * 190) {
-							int temp = i * 4 + j;
+							unsigned int temp = i * 4 + j;
 
 							if (temp < cbs.size()) {
 								readCoBook(temp);
@@ -788,14 +787,13 @@ void build() {
 				if (m.y > 80 + i * 133 && m.y < 170 + i * 133) {
 					for (int j = 0; j < 8; j++) {
 						if (m.x > 150 + j * 95 && m.x < 217 + j * 95) {
-							int temp = i * 8 + j;
+							unsigned int temp = i * 8 + j;
 							Cobook cb;
 							cb.setName(bks[temp].getName());
 							cb.setPage(bks[temp].getPage());
 							cb.setFlag(csh[Flag].getSize());
 							cb.setNote("");
 
-							FILE* fps;
 							string te;
 							te.assign(DATA_DIR).append("\\").append(shs[Flag].getName()).append("\\").append(bks[temp].getName()).append(".co");
 
@@ -888,7 +886,7 @@ void build() {
 				if (m.y > 80 + i * 133 && m.y < 170 + i * 133) {
 					for (int j = 0; j < 8; j++) {
 						if (m.x > 150 + j * 95 && m.x < 217 + j * 95) {
-							int temp = i * 8 + j;
+							unsigned int temp = i * 8 + j;
 
 							if (temp < bks.size()) {
 								readBook(temp);

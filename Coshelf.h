@@ -50,7 +50,7 @@ void Coshelf::getCoBook() {
 	}
 
 	sort(cbs.begin(), cbs.end(), cm1);
-	for (int i = 0; i < cbs.size(); i++) {
+	for (unsigned int i = 0; i < cbs.size(); i++) {
 		cbs[i].setFlag(i);
 	}
 
